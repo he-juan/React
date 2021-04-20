@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React 实例</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<h1><span class="label label-info">DEMO 6</span></h1>
+<br><br><br>
+<div id="example"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="js/browser.min.js"></script>
+<script type="text/babel">
+    let style = {color:'red'}
+    var RepoList = React.createClass({                                      //创建一个组件类
+        getInitialState: function() {                                       //设置state的初始值
+            return {
+                loading: true,
+                error: null,
+                data: null
+            };
+        },
+
+        componentDidMount() {                                                    //组件渲染成功后触发，一般用于处理后台传输的数据
+            this.props.promise.then(                                             //props 用于接受组件外的数据
+                value => this.setState({loading: false, data: value}),           //setstate可以更新state的值，使组件重新渲染render
+                error => this.setState({loading: false, error: error}));
+        },
+
+        render: function() {
+            if (this.state.loading) {                                                //state用于接收组件内部的数据
+                return <span>Loading...</span>;
+            }
+            else if (this.state.error !== null) {
+                return <span>Error: {this.state.error.message}</span>;
+            }
+            else {
+                var repos = this.state.data.items;
+                var repoList = repos.map(function (repo, index) {
+                    return (
+                        <li key={index}><a href={repo.html_url}>{repo.name}</a> ({repo.stargazers_count} stars) <br/> {repo.description}</li>      //key用于唯一标识每个组件
+                    );
+                });
+                return (
+                    <main >
+                        <h1>Most Popular JavaScript Projects in Github</h1>
+                        <div style={style}>
+                            <ol >{repoList}</ol>
+                        </div>
+                    </main>
+                );
+            }
+        }
+    });
+
+    ReactDOM.render(
+        <RepoList promise={$.getJSON('https://api.github.com/search/repositories?q=javascript&sort=stars')} />,
+        document.getElementById('example')
+    );
+</script>
+</body>
+</html>

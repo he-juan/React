@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Title</title>
+</head>
+<body>
+<h1><span class="label label-info">DEMO 4</span></h1>
+<br><br><br>
+
+<div id="example"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="js/browser.min.js"></script>
+
+<script type="text/babel">
+
+    let style ={color:'red',textAlign:'center'}
+    let Text = React.createClass({
+        getInitialState:function(){
+            return {content:'React'}
+        },
+        keyUp:function(e){
+            this.setState({content:e.target.content},function(){
+                console.warn("state:",this.state.content)
+            })
+        },
+        render:function(){
+            return(
+                <div style={style}>
+                    <span>大家好，我是用{this.state.content}渲染出来的！！</span>
+                    <input onKeyUp={this.keyUp}/>
+                </div>
+            )
+        }
+    })
+    ReactDOM.render(
+        <Text></Text>,
+        document.getElementById('example')
+    )
+
+</script>
+
+</body>
+</html>

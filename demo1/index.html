@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React 实例</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<h1><span class="label label-info">DEMO 1</span></h1>
+<br><br><br>
+
+<div id="example"></div>
+
+<script type="text/babel">
+    class EquipmentList extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                //根据props获取数据
+                equipmentList: this.props.list,
+                equipmentListNow: []
+            }
+        }
+        switchTab(id) {
+            let _list = this.state.equipmentList.filter(item => item.id === id);
+            this.setState({
+                equipmentListNow: _list
+            })
+        }
+        componentDidMount() {
+            let _list = this.state.equipmentList;
+            this.setState({
+                equipmentListNow: _list
+            })
+        }
+        render() {
+            return (
+                <div>
+                    <a href="javascript:;" onClick={() => {
+                        this.switchTab(1);
+                    }}>歼击机</a>
+                    <a href="javascript:;" onClick={() => {
+                        this.switchTab(2);
+                    }}>轰炸机</a>
+                    <a href="javascript:;" onClick={() => {
+                        this.switchTab(3);
+                    }}>运输机</a>
+                    <ul>
+                        {this.state.equipmentListNow.map(item => <li key={item.id}>{item.title}</li>)}
+                    </ul>
+                </div>
+            )
+        }
+    }
+    //设置 props 默认值
+    EquipmentList.defaultProps={
+        list:[
+            {
+                id: 1,
+                title: '歼20'
+            },
+            {
+                id: 2,
+                title: '轰6K'
+            },
+            {
+                id: 3,
+                title: '运20'
+            }
+        ]
+    }
+    ReactDOM.render(<EquipmentList/>,
+        document.getElementById('example')
+    );
+</script>
+
+</body>
+</html>

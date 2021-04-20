@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Title</title>
+</head>
+<body>
+<h1><span class="label label-info">DEMO 3</span></h1>
+<br><br><br>
+
+<div id="example"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/react.js"></script>
+<script src="js/react-dom.js"></script>
+<script src="js/browser.min.js"></script>
+
+<script type="text/babel">
+
+    let style ={color:'red',textAlign:'center'}
+    let Text = React.createClass({
+       render:function(){
+          return(
+              <div style={style}>
+                  <h2 >大家好，我是{this.props.name}，今年{this.props.age}</h2>
+                  <br/>
+                  <div>
+                      大家好，我是用{this.props.name}渲染出来的，今年{this.props.age}，很高兴与你相遇！
+                  </div>
+              </div>
+          )
+       }
+    })
+
+    ReactDOM.render(
+        <Text name={'react'} age={18}/>,
+        document.getElementById("example")
+    )
+
+</script>
+
+</body>
+</html>
