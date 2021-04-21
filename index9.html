@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <title>Title 示例</title>
+</head>
+<body>
+
+<div class="well div" id="example"></div>
+
+<script type="text/babel">
+    class MyComponent extends React.Component{
+        constructor(props) {
+            super(props)
+            this.state ={
+                value:0
+            }
+        }
+        // handleClick = () => {
+        //     this.setState({value:1})
+        //     console.log('在handleClick里输出' + this.state.value);
+        // }
+
+        handleStateChange1 = () => {
+            this.setState({value:1})
+            console.log('在handleClick里输出' + this.state.value);
+        }
+        handleStateChange2 = () => {
+            this.setState({value:2})
+            console.log('在handleClick里输出' + this.state.value);
+        }
+        handleStateChange3 = () => {
+            this.setState({value:3})
+            console.log('在handleClick里输出' + this.state.value);
+        }
+        handleClick = () => {
+            this.handleStateChange1();
+            this.handleStateChange2();
+            this.handleStateChange3();
+        }
+
+        render(){
+            console.log('在render()里输出' + this.state.value);
+            return(
+                <div>
+                    <button onClick ={this.handleClick}> 按钮 </button>
+                    <h2 >{this.state.value}</h2>
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+        < MyComponent />,
+        document.getElementById('example')
+    );
+</script>
+
+</body>
+</html>

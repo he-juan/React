@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="example"></div>
+    <script type="text/babel">
+        class Son extends React.Component{
+            render(){
+                console.log('儿子：在render()里输出' + this.props.gene);
+                return (
+                    <div onClick = {this.props.handleClick} style={{marginLeft:'20px',marginTop:'10px'}}>
+                        <h3 style ={{marginTop:30}}>我从我的爷爷那里得到了基因--
+                            <span style={{color:'red'}}>{this.props.gene}</span>
+                        </h3>
+                    </div>
+                )
+            }
+        }
+        class Father extends React.Component{
+            render(){
+                console.log('爸爸：在render()里输出' + this.props.gene);
+                return (<Son gene = {this.props.gene}/>)
+            }
+        }
+        class GrandFather extends React.Component{
+            constructor(props) {
+                super(props)
+                this.state ={
+                    gene:'[爷爷的基因]'
+                }
+            }
+            handleClick = () =>{
+                this.setState({gene:'奶奶的基因'})
+            }
+            render(){
+                console.log('爷爷：在render()里输出' + this.state.gene);
+                return (
+                    <div>
+                        <button onClick ={this.handleClick}  style={{marginLeft:'20px',marginTop:'10px',backgroundColor:'yellow'}}>按钮</button>
+                        <Father gene = {this.state.gene} />
+                    </div>
+
+                )
+            }
+        }
+        ReactDOM.render(
+            <GrandFather />,
+            document.getElementById("example")
+        )
+    </script>
+</body>
+</html>

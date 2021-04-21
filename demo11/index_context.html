@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/react.js"></script>
+    <script src="../js/react-dom.js"></script>
+    <script src="../js/browser.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class Son extends React.Component{
+            render(){
+                console.log('儿子：在render()里输出' + this.context.gene);
+                return (
+                    <div onClick = {this.props.handleClick} style={{marginLeft:'20px',marginTop:'10px'}}>
+                        <h3 style ={{marginTop:30}}>我从我的爷爷那里得到了基因--
+                            <span style={{color:'red'}}>{this.context.gene}</span>
+                        </h3>
+                    </div>
+                )
+            }
+        }
+        Son.contextTypes ={
+            gene:React.PropTypes.string
+        }
+        class Father extends React.Component{
+            render(){
+                console.log('爸爸：在render()里输出' + this.context.gene);
+                return (<Son gene = {this.context.gene}/>)
+            }
+        }
+        class GrandFather extends React.Component{
+            getChildContext(){
+                return {gene:'爷爷的基因'}
+            }
+            // constructor(props) {
+            //     super(props)
+            //     this.state ={
+            //         gene:''
+            //     }
+            //     this.handleClick = this.handleClick.bind(this);
+            // }
+
+            // handleClick = () =>{
+            //     this.setState({gene:'奶奶的基因'})
+            // }
+
+            render(){
+                console.log('爷爷：在render()里输出' + this.context.gene);
+                return (
+                    <div>
+                        <!--<button onClick ={this.handleClick}  style={{marginLeft:'20px',marginTop:'10px',backgroundColor:'yellow'}}>按钮</button>-->
+                        <Father gene = {this.context.gene} />
+                    </div>
+
+                )
+            }
+        }
+        GrandFather.childContextTypes = {
+            gene: React.PropTypes.string
+        };
+        ReactDOM.render(
+            <GrandFather />,
+            document.getElementById("example")
+        )
+    </script>
+</body>
+</html>
