@@ -28,7 +28,14 @@
                 console.warn("state:",this.state.content)
             })
         },
+        componentWillMount(){
+            console.log("componentWillMount---开始挂载组件")
+        },
+        componentDidMount(){
+            console.log("componentDidMount ---挂载组件完成")
+        },
         render:function(){
+            console.log("render -- 挂载组建中")
             return(
                 <div style={style}>
                     <span>大家好，我是用{this.state.content}渲染出来的！！</span>

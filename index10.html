@@ -15,6 +15,7 @@
     class Son extends React.Component{
         render(){
             console.log('儿子：在render()里输出' + this.props.value);
+            console.warn("儿子--render ---> 挂载组建中")
             return(
                 <div>
                     <div onClick = {this.props.handleClick}>
@@ -33,11 +34,29 @@
             }
 
         }
+        componentWillMount(){
+            console.log("componentWillMount---开始挂载组件")
+        }
+        componentDidMount(){
+            console.log("componentDidMount ---挂载组件完成")
+        }
+        componentWillReceiveProps(){
+            console.log("componentWillReceiveProps")
+        }
+        shouldComponentUpdate(){
+            console.warn("shouldComponentUpdate")
+            return true
+        }
+        componentWillUpdate(){
+            console.log("componentWillUpdate")
+        }
+
         handleClick = () => {
             this.setState({value:'b'})
         }
         render(){
             console.log('父亲：在render()里输出' + this.state.value);
+            console.warn("父亲--render ---> 挂载组建中")
             return (
                 <div style ={{margin:50}}>
                     <button onClick ={this.handleClick}>按钮</button>
