@@ -44,11 +44,14 @@
             console.log("componentWillReceiveProps")
         }
         shouldComponentUpdate(){
-            console.warn("shouldComponentUpdate")
+            console.warn("shouldComponentUpdate --> 准备开始更新")
             return true
         }
         componentWillUpdate(){
-            console.log("componentWillUpdate")
+            console.log("componentWillUpdate  --> 更新中")
+        }
+        componentDidUpdate(){
+            console.log("componentDidUpdate --> 更新完成")
         }
 
         handleClick = () => {
