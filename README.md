@@ -1,4 +1,4 @@
-## 二、react 生命周期 ##
+## 一、react 生命周期 ##
 [钩子函数](https://www.cnblogs.com/fightjianxian/p/12457433.html)
 
  1. 生命周期
@@ -33,7 +33,7 @@
 
 -----------
 
-##二、基本问题
+## 二、基本问题
 
  1. 问题一：<font color=red> setState到底是同步的还是异步的？</font>
      - （1）示例查看结果：
@@ -104,15 +104,15 @@
         </html>
   ```
 
-     - （2）当点击按钮时，调用handleClick函数，首先调用this.setState()设置value,随即把this.state.value输出，但结果是，虽然调用了setState({value:1})，但this.state.value并不会马上变成0，而是直到render()函数调用时，setState()才真正被执行；如下所示
-         - ![验证结果](/api/file/getImage?fileId=607fca7e09eb7d0d960000f0)
-     - （3）<font color=red>要是在render()前多次调用this.setState()改变同一个值呢？</font>
-         - 对handleClick做一些修改，让它变得复杂一点，在调用handleClick的时候，依次调用handleStateChange1 ，handleStateChange2，handleStateChange3，它们会调用setState分别设置value为1,2,3并且随即打印;结果如下所示。
-         - ![验证结果](/api/file/getImage?fileId=607fccd109eb7d0d960000f1)
-     - （4）setState渲染流程
+      - （2）当点击按钮时，调用handleClick函数，首先调用this.setState()设置value,随即把this.state.value输出，但结果是，虽然调用了setState({value:1})，但this.state.value并不会马上变成0，而是直到render()函数调用时，setState()才真正被执行；如下所示
+        - ![验证结果](/api/file/getImage?fileId=607fca7e09eb7d0d960000f0)
+      - （3）<font color=red>要是在render()前多次调用this.setState()改变同一个值呢？</font>
+        - 对handleClick做一些修改，让它变得复杂一点，在调用handleClick的时候，依次调用handleStateChange1 ，handleStateChange2，handleStateChange3，它们会调用setState分别设置value为1,2,3并且随即打印;结果如下所示。
+        - ![验证结果](/api/file/getImage?fileId=607fccd109eb7d0d960000f1)
+      - （4）setState渲染流程
      !![title](/api/file/getImage?fileId=607fd62409eb7d0d960000f6)
 
-     - 总结： <font color=red>setSate大部分的时候是异步执行的，但是，在react本身监听不到的地方，如原生js的监听里，setInterval,setTimeout里，setState就是同步更新的</font>
+      - 总结： <font color=red>setSate大部分的时候是异步执行的，但是，在react本身监听不到的地方，如原生js的监听里，setInterval,setTimeout里，setState就是同步更新的</font>
 
 
 
