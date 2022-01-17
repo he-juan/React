@@ -255,9 +255,12 @@
          - 解释下代码：
              > getChildContext()是你在顶层组件中定义的钩子函数，这个函数返回一个对象——你希望在后代组件中取用的属性就放在这个对象中，譬如这个例子中我希望在Son组件中通过this.context.gene取属性，所以在getChildContext()中返回{gene:'[爷爷的基因]'}
 GrandFather.childContextTypes和Son.contextTypes 用于规定顶层组件和取顶层组件context的后代组件的属性类型
-         - （3） context 和 props之间的区别：
+
+   
+   - （3） context 和 props之间的区别：
           ![title](/api/file/getImage?fileId=607fec7309eb7d0d96000131)
-         - （4）新版本react的写法：
+   
+   - （4）新版本react的写法：
                  ```
                     const PropTypes = require("Prop-Types");
                     GrandFather.childContextTypes = {
